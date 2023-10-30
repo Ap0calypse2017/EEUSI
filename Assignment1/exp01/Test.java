@@ -3,7 +3,11 @@ package exp01;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.swing.Popup;
+
 public class Test {
+
+    private static int REPEAT_TIMES = 10; // Number of repetitions for a multiple benchmark test
 
     /*
      * Generate a random Integer array of given size.
@@ -32,20 +36,59 @@ public class Test {
         return end - start;
     }
 
+    /*
+     * Repeat the same
+     */
+    private static <T extends Comparable<T>> long[] repeatBenchmark(Sorter<T> sorter, T[] array, int times) {
+        long[] attempts = new long[times];
+
+        for (int i = 0; i < times; i++) {
+            T[] burnerArray = Arrays.copyOf(array, array.length);
+            attempts[i] = benchmarkSort(sorter, burnerArray);
+        }
+
+        return attempts;
+    }
+
+    /*
+     * Compute the mean value given an array of longs.
+     */
+    private static long meanTime(long[] attempts) {
+        long sum = 0;
+        for (long t : attempts) {
+            sum += t;
+        }
+
+        return sum / attempts.length;
+    }
+
     public static void main(String args[]) {
-        Integer[] baseArray = generateRandomArray(100);
-
+        /* Initialize sorters */
         BubbleSortPassPerItem<Integer> ppiSorter = new BubbleSortPassPerItem<Integer>();
-        long ppiTime = benchmarkSort(ppiSorter, Arrays.copyOf(baseArray, baseArray.length));
-
         BubbleSortUntilNoChange<Integer> uncSorter = new BubbleSortUntilNoChange<Integer>();
-        long uncTime = benchmarkSort(uncSorter, Arrays.copyOf(baseArray, baseArray.length));
-
         BubbleSortWhileNeeded<Integer> wnSorter = new BubbleSortWhileNeeded<Integer>();
-        long wnTime = benchmarkSort(wnSorter, Arrays.copyOf(baseArray, baseArray.length));
 
-        System.out.println("PassPerItem\t" + ppiTime + "ns");
-        System.out.println("UntilNoChange\t" + uncTime + "ns");
-        System.out.println("WhileNeeded\t" + wnTime + "ns");
+        int[] pools = new int[] { 100, 1000, 10000, 100000, 1000000 }; // sizes of arrays to test
+        System.out.println("\nRUNING TEST ON ARRAYS OF VARYING SIZES");
+        System.out.printf("Each test is performed %d times\n", REPEAT_TIMES);
+        System.out.println("-".repeat(55));
+        System.out.format("%10s%15s%15s%15s\n", "Array Size", "PassPerItem", "UntilNoChange", "WhileNeeded");
+        System.out.println("-".repeat(55));
+
+        /* Go through all test cases */
+        for (int p : pools) {
+            /* Generate random array of size p */
+            Integer[] array = generateRandomArray(p);
+
+            /* Implementation for multiple benchmarks */
+            long[] ppiAttempts = repeatBenchmark(ppiSorter, array, REPEAT_TIMES);
+            long[] uncAttempts = repeatBenchmark(uncSorter, array, REPEAT_TIMES);
+            long[] wnAttempts = repeatBenchmark(wnSorter, array, REPEAT_TIMES);
+
+            /* Print mean benchmarks */
+            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttempts), meanTime(uncAttempts),
+                    meanTime(wnAttempts));
+        }
+        System.out.println("-".repeat(55));
     }
 }
