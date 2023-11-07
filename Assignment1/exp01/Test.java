@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Test {
 
-    private static int REPEAT_TIMES = 10; // Number of repetitions for a multiple benchmark test
+    private static int REPEAT_TIMES = 500; // Number of repetitions for a multiple benchmark test
     private static int WARMAP_CYCLES = 50; // Cycles when warming up;
 
     /*
@@ -36,6 +36,20 @@ public class Test {
             }
             array[i] = buffer.toString();
         }
+        return array;
+    }
+
+    /*
+     * Generate a random Integer array of given size.
+     */
+    private static Byte[] generateRandomByteArray(int size) {
+        Byte[] array = new Byte[size];
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++) {
+            array[i] = (byte) (random.nextInt(256) - 128);
+        }
+
         return array;
     }
 
@@ -85,11 +99,19 @@ public class Test {
 
     public static void main(String args[]) {
         /* Initialize sorters */
-        BubbleSortPassPerItem<String> ppiSorter = new BubbleSortPassPerItem<String>();
-        BubbleSortUntilNoChange<String> uncSorter = new BubbleSortUntilNoChange<String>();
-        BubbleSortWhileNeeded<String> wnSorter = new BubbleSortWhileNeeded<String>();
+        BubbleSortPassPerItem<String> ppiSorterStr = new BubbleSortPassPerItem<String>();
+        BubbleSortUntilNoChange<String> uncSorterStr = new BubbleSortUntilNoChange<String>();
+        BubbleSortWhileNeeded<String> wnSorterStr = new BubbleSortWhileNeeded<String>();
 
-        int[] pools = new int[] { 100, 1000, 10000, }; // sizes of arrays to test
+        BubbleSortPassPerItem<Integer> ppiSorterInt = new BubbleSortPassPerItem<Integer>();
+        BubbleSortUntilNoChange<Integer> uncSorterInt = new BubbleSortUntilNoChange<Integer>();
+        BubbleSortWhileNeeded<Integer> wnSorterInt = new BubbleSortWhileNeeded<Integer>();
+
+        BubbleSortPassPerItem<Byte> ppiSorterByte = new BubbleSortPassPerItem<Byte>();
+        BubbleSortUntilNoChange<Byte> uncSorterByte = new BubbleSortUntilNoChange<Byte>();
+        BubbleSortWhileNeeded<Byte> wnSorterByte = new BubbleSortWhileNeeded<Byte>();
+
+        int[] pools = new int[] { 100, 1000, 5000, }; // sizes of arrays to test
         System.out.println("\nRUNING TEST ON ARRAYS OF VARYING SIZES");
         System.out.printf("Each test is performed %d times\n", REPEAT_TIMES);
         System.out.println("-".repeat(55));
@@ -99,17 +121,36 @@ public class Test {
         /* Go through all test cases */
         for (int p : pools) {
             /* Generate random array of size p */
-            String[] array = generateRandomStringArray(p);
+            String[] arrayString = generateRandomStringArray(p);
+            Integer[] arrayInt = generateRandomArray(p);
+            Byte[] arrayByte = generateRandomByteArray(p);
 
             /* Implementation for multiple benchmarks */
-            long[] ppiAttempts = repeatBenchmark(ppiSorter, Arrays.copyOf(array, array.length), REPEAT_TIMES);
-            long[] uncAttempts = repeatBenchmark(uncSorter, Arrays.copyOf(array, array.length), REPEAT_TIMES);
-            long[] wnAttempts = repeatBenchmark(wnSorter, Arrays.copyOf(array, array.length), REPEAT_TIMES);
+            /* STRING */
+            long[] ppiAttemptsStr = repeatBenchmark(ppiSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
+            long[] uncAttemptsStr = repeatBenchmark(uncSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
+            long[] wnAttemptsStr = repeatBenchmark(wnSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
 
             /* Print mean benchmarks */
-            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttempts), meanTime(uncAttempts),
-                    meanTime(wnAttempts));
+            System.out.println("STRING");
+            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsStr), meanTime(uncAttemptsStr),
+                    meanTime(wnAttemptsStr));
 
+            /* INTEGER */
+            long[] ppiAttemptsInt = repeatBenchmark(ppiSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
+            long[] uncAttemptsInt = repeatBenchmark(uncSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
+            long[] wnAttemptsInt = repeatBenchmark(wnSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
+            System.out.println("INTEGER");
+            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsInt), meanTime(uncAttemptsInt),
+                    meanTime(wnAttemptsInt));
+
+            /* BYTES */
+            long[] ppiAttemptsByte = repeatBenchmark(ppiSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
+            long[] uncAttemptsByte = repeatBenchmark(uncSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
+            long[] wnAttemptsByte = repeatBenchmark(wnSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
+            System.out.println("BYTE");
+            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsByte), meanTime(uncAttemptsByte),
+                    meanTime(wnAttemptsByte));
         }
 
         System.out.println("-".repeat(55));
