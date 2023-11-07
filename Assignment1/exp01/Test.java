@@ -1,17 +1,24 @@
 package exp01;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Test {
-
     private static int REPEAT_TIMES = 500; // Number of repetitions for a multiple benchmark test
     private static int WARMAP_CYCLES = 50; // Cycles when warming up;
+    private static String OUTPUT_DIR = "./results/";
 
     /*
      * Generate a random Integer array of given size.
      */
-    private static Integer[] generateRandomArray(int size) {
+    private static Integer[] generateRandomIntegerArray(int size) {
         Integer[] array = new Integer[size];
         Random random = new Random();
 
@@ -97,6 +104,64 @@ public class Test {
         return sum / attempts.length;
     }
 
+    /*
+     * Prints on terminal the benchmark header
+     */
+    private static void printHeader() {
+        System.out.println("\nRUNING TEST ON ARRAYS OF VARYING SIZES");
+        System.out.printf("Each test is performed %d times\n", REPEAT_TIMES);
+        System.out.println("-".repeat(65));
+        System.out.format("%-10s%10s%15s%15s%15s\n", "Type", "Size", "PassPerItem", "UntilNoChange",
+                "WhileNeeded");
+        System.out.println("-".repeat(65));
+    }
+
+    /*
+     * Prints on terminal a table row of results
+     */
+    private static void printBenchResult(String type, int pool, long[] ppi, long[] unc, long[] wn) {
+        System.out.format("%-10s%10d%15d%15d%15d\n", type, pool, meanTime(ppi), meanTime(unc), meanTime(wn));
+    }
+
+    /*
+     * Write array to file
+     */
+    public static void writeToFile(long array[], String filename) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(OUTPUT_DIR + filename);
+            for (long time : array) {
+                writer.write(time + System.lineSeparator());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static <T> T[] cpArray(T[] array) {
+        return Arrays.copyOf(array, array.length);
+    }
+
+    /*
+     * Perform a full cycle of benchmarks
+     */
+    public static <T extends Comparable<T>> void benchmark(BubbleSortPassPerItem<T> ppiSorter,
+            BubbleSortUntilNoChange<T> uncSorter,
+            BubbleSortWhileNeeded<T> wnSorter, T[] array, String type) {
+        int pool = array.length;
+        long[] ppiAttempts = repeatBenchmark(ppiSorter, cpArray(array), REPEAT_TIMES);
+        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
+        long[] uncAttempts = repeatBenchmark(uncSorter, cpArray(array), REPEAT_TIMES);
+        writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
+        long[] wnAttempts = repeatBenchmark(wnSorter, cpArray(array), REPEAT_TIMES);
+        writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
+
+        /* Print mean benchmarks */
+        printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
+    }
+
     public static void main(String args[]) {
         /* Initialize sorters */
         BubbleSortPassPerItem<String> ppiSorterStr = new BubbleSortPassPerItem<String>();
@@ -112,47 +177,18 @@ public class Test {
         BubbleSortWhileNeeded<Byte> wnSorterByte = new BubbleSortWhileNeeded<Byte>();
 
         int[] pools = new int[] { 100, 1000, 5000, }; // sizes of arrays to test
-        System.out.println("\nRUNING TEST ON ARRAYS OF VARYING SIZES");
-        System.out.printf("Each test is performed %d times\n", REPEAT_TIMES);
-        System.out.println("-".repeat(55));
-        System.out.format("%10s%15s%15s%15s\n", "Array Size", "PassPerItem", "UntilNoChange", "WhileNeeded");
-        System.out.println("-".repeat(55));
+        printHeader();
 
         /* Go through all test cases */
         for (int p : pools) {
-            /* Generate random array of size p */
-            String[] arrayString = generateRandomStringArray(p);
-            Integer[] arrayInt = generateRandomArray(p);
-            Byte[] arrayByte = generateRandomByteArray(p);
-
-            /* Implementation for multiple benchmarks */
-            /* STRING */
-            long[] ppiAttemptsStr = repeatBenchmark(ppiSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
-            long[] uncAttemptsStr = repeatBenchmark(uncSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
-            long[] wnAttemptsStr = repeatBenchmark(wnSorterStr, Arrays.copyOf(arrayString, arrayString.length), REPEAT_TIMES);
-
-            /* Print mean benchmarks */
-            System.out.println("STRING");
-            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsStr), meanTime(uncAttemptsStr),
-                    meanTime(wnAttemptsStr));
-
-            /* INTEGER */
-            long[] ppiAttemptsInt = repeatBenchmark(ppiSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
-            long[] uncAttemptsInt = repeatBenchmark(uncSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
-            long[] wnAttemptsInt = repeatBenchmark(wnSorterInt, Arrays.copyOf(arrayInt, arrayInt.length), REPEAT_TIMES);
-            System.out.println("INTEGER");
-            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsInt), meanTime(uncAttemptsInt),
-                    meanTime(wnAttemptsInt));
-
-            /* BYTES */
-            long[] ppiAttemptsByte = repeatBenchmark(ppiSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
-            long[] uncAttemptsByte = repeatBenchmark(uncSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
-            long[] wnAttemptsByte = repeatBenchmark(wnSorterByte, Arrays.copyOf(arrayByte, arrayByte.length), REPEAT_TIMES);
-            System.out.println("BYTE");
-            System.out.format("%10d%15d%15d%15d\n", p, meanTime(ppiAttemptsByte), meanTime(uncAttemptsByte),
-                    meanTime(wnAttemptsByte));
+            /* Integer */
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, generateRandomIntegerArray(p), "Integer");
+            /* String */
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, generateRandomStringArray(p), "String");
+            /* Byte */
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, generateRandomByteArray(p), "Byte");
         }
 
-        System.out.println("-".repeat(55));
+        System.out.println("-".repeat(65));
     }
 }
