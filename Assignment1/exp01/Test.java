@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Test {
-    private static int REPEAT_TIMES = 500; // Number of repetitions for a multiple benchmark test
+    private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
     private static int WARMAP_CYCLES = 50; // Cycles when warming up;
     private static String OUTPUT_DIR = "./results/";
 
