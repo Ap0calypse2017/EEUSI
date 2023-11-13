@@ -11,48 +11,55 @@ public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
     private static int WARMAP_CYCLES = 50; // Cycles when warming up;
     private static String OUTPUT_DIR = "./results/";
+    private static int STRING_LENGTH = 5;
+    private static int[] POOLS = { 100, 1000, 5000 }; // sizes of arrays to test
+
 
     /*
-     * Generate a random Integer array of given size.
+     * Generate a random Integer array.
      */
-    private static Integer[] generateRandomIntegerArray(int size) {
+    private static Integer[] genRandIntArray(int size) {
         Integer[] array = new Integer[size];
         Random random = new Random();
-
         for (int i = 0; i < size; i++) {
             array[i] = random.nextInt(); // 0-99
         }
-
         return array;
     }
 
-    private static Integer[] generateSortedIntegerArray(int size) {
+    /*
+     * Generate an Integer array in ascending order.
+     */
+    private static Integer[] genAscIntArray(int size) {
         Integer[] array = new Integer[size];
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             array[i] = i;
         }
-
         return array;
     }
 
-    private static Integer[] generateInverseIntegerArray(int size) {
+    /*
+     * Generate an Integer array in descending order.
+     */
+    private static Integer[] genDescIntArray(int size) {
         Integer[] array = new Integer[size];
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             array[i] = size - i;
         }
-
         return array;
     }
 
-    private static String[] generateRandomStringArray(int size) {
+    /*
+     * Generate a random String array.
+     */
+    private static String[] genRandStrArray(int size) {
         String[] array = new String[size];
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 5; // lenght of the string
-        StringBuilder buffer = new StringBuilder(targetStringLength);
+        StringBuilder buffer = new StringBuilder(STRING_LENGTH);
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < targetStringLength; j++) {
+            for (int j = 0; j < STRING_LENGTH; j++) {
                 int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
                 buffer.append((char) randomLimitedInt);
             }
@@ -61,15 +68,17 @@ public class Test {
         return array;
     }
 
-    private static String[] generateSortedStringArray(int size) {
+    /*
+     * Generate a String array in ascending order.
+     */
+    private static String[] genAscStrArray(int size) {
         String[] array = new String[size];
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 5; // lenght of the string
-        StringBuilder buffer = new StringBuilder(targetStringLength);
+        StringBuilder buffer = new StringBuilder(STRING_LENGTH);
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < targetStringLength; j++) {
+            for (int j = 0; j < STRING_LENGTH; j++) {
                 int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
                 buffer.append((char) randomLimitedInt);
             }
@@ -78,19 +87,20 @@ public class Test {
         Arrays.sort(array);
 
         return array;
-    
 
     }
 
-    private static String[] generateInverseSortedStringArray(int size) {
+    /*
+     * Generate a String array in descending order.
+     */
+    private static String[] genDescStrArray(int size) {
         String[] array = new String[size];
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 5; // lenght of the string
-        StringBuilder buffer = new StringBuilder(targetStringLength);
+        StringBuilder buffer = new StringBuilder(STRING_LENGTH);
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < targetStringLength; j++) {
+            for (int j = 0; j < STRING_LENGTH; j++) {
                 int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
                 buffer.append((char) randomLimitedInt);
             }
@@ -99,55 +109,51 @@ public class Test {
         Arrays.sort(array, Collections.reverseOrder());
 
         return array;
-    
+
     }
-    
-    
 
     /*
-     * Generate a random Integer array of given size.
+     * Generate a random Byte array.
      */
-    private static Byte[] generateRandomByteArray(int size) {
+    private static Byte[] genRandByteArray(int size) {
         Byte[] array = new Byte[size];
         Random random = new Random();
-
         for (int i = 0; i < size; i++) {
             array[i] = (byte) (random.nextInt(256) - 128);
         }
-
         return array;
     }
 
-    private static Byte[] generateSortedByteArray(int size) {
+    /*
+     * Generate a Byte array in ascending order.
+     */
+    private static Byte[] genAscByteArray(int size) {
         Byte[] array = new Byte[size];
         Random random = new Random();
-    
         for (int i = 0; i < size; i++) {
             array[i] = (byte) (random.nextInt(256) - 128);
         }
-    
         // Sort the array
         Arrays.sort(array);
-    
-        return array;
-    }
-
-    private static Byte[] generateInverseSortedByteArray(int size) {
-        Byte[] array = new Byte[size];
-        Random random = new Random();
-    
-        for (int i = 0; i < size; i++) {
-            array[i] = (byte) (random.nextInt(256) - 128);
-        }
-    
-        // Sort the array in reverse order
-        Arrays.sort(array, Collections.reverseOrder());
-    
         return array;
     }
 
     /*
-     * Compute time (nanoseconds) taken for a sorter to sort an array.
+     * Generate a Byte array in descending order.
+     */
+    private static Byte[] genDescByteArray(int size) {
+        Byte[] array = new Byte[size];
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            array[i] = (byte) (random.nextInt(256) - 128);
+        }
+        // Sort the array in reverse order
+        Arrays.sort(array, Collections.reverseOrder());
+        return array;
+    }
+
+    /*
+     * Compute time(ns) taken for a sorter to sort an array.
      */
     private static <T extends Comparable<T>> long benchmarkSort(Sorter<T> sorter, T[] array) {
         long start, end;
@@ -226,6 +232,9 @@ public class Test {
         }
     }
 
+    /*
+     * Duplicate an array.
+     */
     public static <T> T[] cpArray(T[] array) {
         return Arrays.copyOf(array, array.length);
     }
@@ -262,17 +271,24 @@ public class Test {
         BubbleSortUntilNoChange<Byte> uncSorterByte = new BubbleSortUntilNoChange<Byte>();
         BubbleSortWhileNeeded<Byte> wnSorterByte = new BubbleSortWhileNeeded<Byte>();
 
-        int[] pools = new int[] { 100, 1000, 5000, }; // sizes of arrays to test
         printHeader();
 
         /* Go through all test cases */
-        for (int p : pools) {
+        for (int p : POOLS) {
             /* Integer */
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, generateRandomIntegerArray(p), "Integer");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, genRandIntArray(p), "Integer ~");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, genAscIntArray(p), "Integer >");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, genDescIntArray(p), "Integer <");
+
             /* String */
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, generateRandomStringArray(p), "String");
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genRandStrArray(p), "String ~");
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genAscStrArray(p), "String >");
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genDescStrArray(p), "String <");
+
             /* Byte */
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, generateRandomByteArray(p), "Byte");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, genRandByteArray(p), "Byte ~");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, genAscByteArray(p), "Byte >");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, genDescByteArray(p), "Byte <");
         }
 
         System.out.println("-".repeat(65));
