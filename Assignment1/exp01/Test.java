@@ -2,12 +2,10 @@ package exp01;
 
 import java.io.FileWriter;
 import java.io.IOException;
-<<<<<<< Updated upstream
-import java.util.ArrayList;
-=======
->>>>>>> Stashed changes
+
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Collections;
 
 public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
@@ -28,11 +26,29 @@ public class Test {
         return array;
     }
 
+    private static Integer[] generateSortedIntegerArray(int size) {
+        Integer[] array = new Integer[size];
+        for(int i = 0; i < size; i++) {
+            array[i] = i;
+        }
+
+        return array;
+    }
+
+    private static Integer[] generateInverseIntegerArray(int size) {
+        Integer[] array = new Integer[size];
+        for(int i = 0; i < size; i++) {
+            array[i] = size - i;
+        }
+
+        return array;
+    }
+
     private static String[] generateRandomStringArray(int size) {
         String[] array = new String[size];
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10; // lenght of the string
+        int targetStringLength = 5; // lenght of the string
         StringBuilder buffer = new StringBuilder(targetStringLength);
         Random random = new Random();
         for (int i = 0; i < size; i++) {
@@ -45,6 +61,49 @@ public class Test {
         return array;
     }
 
+    private static String[] generateSortedStringArray(int size) {
+        String[] array = new String[size];
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 5; // lenght of the string
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < targetStringLength; j++) {
+                int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            array[i] = buffer.toString();
+        }
+        Arrays.sort(array);
+
+        return array;
+    
+
+    }
+
+    private static String[] generateInverseSortedStringArray(int size) {
+        String[] array = new String[size];
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 5; // lenght of the string
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < targetStringLength; j++) {
+                int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            array[i] = buffer.toString();
+        }
+        Arrays.sort(array, Collections.reverseOrder());
+
+        return array;
+    
+    }
+    
+    
+
     /*
      * Generate a random Integer array of given size.
      */
@@ -56,6 +115,34 @@ public class Test {
             array[i] = (byte) (random.nextInt(256) - 128);
         }
 
+        return array;
+    }
+
+    private static Byte[] generateSortedByteArray(int size) {
+        Byte[] array = new Byte[size];
+        Random random = new Random();
+    
+        for (int i = 0; i < size; i++) {
+            array[i] = (byte) (random.nextInt(256) - 128);
+        }
+    
+        // Sort the array
+        Arrays.sort(array);
+    
+        return array;
+    }
+
+    private static Byte[] generateInverseSortedByteArray(int size) {
+        Byte[] array = new Byte[size];
+        Random random = new Random();
+    
+        for (int i = 0; i < size; i++) {
+            array[i] = (byte) (random.nextInt(256) - 128);
+        }
+    
+        // Sort the array in reverse order
+        Arrays.sort(array, Collections.reverseOrder());
+    
         return array;
     }
 
