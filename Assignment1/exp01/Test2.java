@@ -200,17 +200,18 @@ public class Test2 {
     
         for (int i = 0; i < 3; i++) {
             
-            long[] ppi_attDouble = new long[POOLS[i]];
-            long[] unc_attDouble = new long[POOLS[i]];
-            long[] wn_attDouble = new long[POOLS[i]];
-            long[] ppi_attInt = new long[POOLS[i]];
-            long[] unc_attInt = new long[POOLS[i]];
-            long[] wn_attInt = new long[POOLS[i]];
-            long[] ppi_attByte = new long[POOLS[i]];
-            long[] unc_attByte = new long[POOLS[i]];
-            long[] wn_attByte = new long[POOLS[i]];
+            long[] ppi_attDouble = new long[REPEAT_TIMES];
+            long[] unc_attDouble = new long[REPEAT_TIMES];
+            long[] wn_attDouble = new long[REPEAT_TIMES];
+            long[] ppi_attInt = new long[REPEAT_TIMES];
+            long[] unc_attInt = new long[REPEAT_TIMES];
+            long[] wn_attInt = new long[REPEAT_TIMES];
+            long[] ppi_attByte = new long[REPEAT_TIMES];
+            long[] unc_attByte = new long[REPEAT_TIMES];
+            long[] wn_attByte = new long[REPEAT_TIMES];
             for (int j = 0; j < REPEAT_TIMES; j++) {
                 Double[] doubleArrayRandom = genRandDoubleArray(POOLS[i]);
+                
                 Integer[] intArrayRandom = genRandIntArray(POOLS[i]);
                 Byte[] byteArrayRandom = genRandByteArray(POOLS[i]);
                 ppi_attDouble[j] = benchmarkSort(ppiSorterDouble, doubleArrayRandom);
