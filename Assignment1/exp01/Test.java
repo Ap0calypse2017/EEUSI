@@ -8,13 +8,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 import java.util.Collections;
 
-interface ArrayGenerator {
-    T[] create(int size);
-}
 
 public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
-    private static int WARMUP_CYCLES = 50; // Cycles when warming up;
+    private static int WARMUP_CYCLES = 25; // Cycles when warming up;
     private static String OUTPUT_DIR = "./results/";
     private static int STRING_LENGTH = 5;
     private static int[] POOLS = { 100, 1000, 5000 }; // sizes of arrays to test
@@ -301,11 +298,13 @@ public class Test {
             // benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
             // benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
 
+            
+
+            benchmark(ppiSorterDbl, uncSorterDbl, wnSorterDbl, () -> genRandDoubleArray(p), p, "Double~");
+
             benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genRandStrArray(p), p, "String~");
             // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
             // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genDescStrArray(p), p, "String<");
-
-            benchmark(ppiSorterDbl, uncSorterDbl, wnSorterDbl, () -> genRandDoubleArray(p), p, "Double~");
         }
 
         System.out.println("-".repeat(65));
