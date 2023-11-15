@@ -3,16 +3,10 @@ package exp01;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.Collections;
-
 
 public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
@@ -182,8 +176,6 @@ public class Test {
         for (int i = 0; i < cycles; i++) {
             benchmarkSort(sorter, cpArray(array));
         }
-
-        return attempts;
     }
 
     /*
