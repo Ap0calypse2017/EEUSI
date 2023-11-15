@@ -23,7 +23,7 @@ public class Test {
         Integer[] array = new Integer[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); // 0-99
+            array[i] = random.nextInt(); 
         }
         return array;
     }
@@ -33,9 +33,11 @@ public class Test {
      */
     private static Integer[] genAscIntArray(int size) {
         Integer[] array = new Integer[size];
+        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = i;
+            array[i] = random.nextInt(); 
         }
+        Arrays.sort(array);
         return array;
     }
 
@@ -44,9 +46,11 @@ public class Test {
      */
     private static Integer[] genDescIntArray(int size) {
         Integer[] array = new Integer[size];
+        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = size - i;
+            array[i] = random.nextInt(); 
         }
+        Arrays.sort(array, Collections.reverseOrder());
         return array;
     }
 
@@ -225,7 +229,7 @@ public class Test {
         try {
             writer = new FileWriter(OUTPUT_DIR + filename);
             for (long time : array) {
-                writer.write(time + ",");
+                writer.write(time + System.lineSeparator());
             }
 
             writer.close();
@@ -259,9 +263,9 @@ public class Test {
             wnAttempts[i] = benchmarkSort(wnSorter, cpArray(array));
         }
 
-        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".csv");
-        writeToFile(uncAttempts, type + "_unc_" + pool + ".csv");
-        writeToFile(wnAttempts, type + "_wn_" + pool + ".csv");
+        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
+        writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
+        writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
 
         printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
     }
@@ -291,20 +295,20 @@ public class Test {
         /* Go through all test cases */
         for (int p : POOLS) {
             benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genRandIntArray(p), p, "Integer~");
-            // benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genAscIntArray(p), p, "Integer>");
-            // benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genDescIntArray(p), p, "Integer<");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genAscIntArray(p), p, "Integer>");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genDescIntArray(p), p, "Integer<");
 
             benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genRandByteArray(p), p, "Byte~");
-            // benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
-            // benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
 
             
 
             benchmark(ppiSorterDbl, uncSorterDbl, wnSorterDbl, () -> genRandDoubleArray(p), p, "Double~");
 
             benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genRandStrArray(p), p, "String~");
-            // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
-            // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genDescStrArray(p), p, "String<");
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
+            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genDescStrArray(p), p, "String<");
         }
 
         System.out.println("-".repeat(65));
