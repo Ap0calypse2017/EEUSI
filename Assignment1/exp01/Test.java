@@ -276,9 +276,9 @@ public class Test {
         BubbleSortUntilNoChange<String> uncSorterStr = new BubbleSortUntilNoChange<String>();
         BubbleSortWhileNeeded<String> wnSorterStr = new BubbleSortWhileNeeded<String>();
 
-        BubbleSortPassPerItem<Double> ppiSorterDbl = new BubbleSortPassPerItem<Double>();
-        BubbleSortUntilNoChange<Double> uncSorterDbl = new BubbleSortUntilNoChange<Double>();
-        BubbleSortWhileNeeded<Double> wnSorterDbl = new BubbleSortWhileNeeded<Double>();
+        // BubbleSortPassPerItem<Double> ppiSorterDbl = new BubbleSortPassPerItem<Double>();
+        // BubbleSortUntilNoChange<Double> uncSorterDbl = new BubbleSortUntilNoChange<Double>();
+        // BubbleSortWhileNeeded<Double> wnSorterDbl = new BubbleSortWhileNeeded<Double>();
 
         BubbleSortPassPerItem<Integer> ppiSorterInt = new BubbleSortPassPerItem<Integer>();
         BubbleSortUntilNoChange<Integer> uncSorterInt = new BubbleSortUntilNoChange<Integer>();
@@ -302,9 +302,7 @@ public class Test {
             benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
             benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
 
-            
-
-            benchmark(ppiSorterDbl, uncSorterDbl, wnSorterDbl, () -> genRandDoubleArray(p), p, "Double~");
+            // benchmark(ppiSorterDbl, uncSorterDbl, wnSorterDbl, () -> genRandDoubleArray(p), p, "Double~");
 
             benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genRandStrArray(p), p, "String~");
             benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
