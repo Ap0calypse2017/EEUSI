@@ -2,21 +2,20 @@ package exp01;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.Collections;
+import java.util.List;
 
+interface ArrayGenerator {
+    T[] create(int size);
+}
 
 public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
-    private static int WARMUP_CYCLES = 25; // Cycles when warming up;
+    private static int WARMAP_CYCLES = 50; // Cycles when warming up;
     private static String OUTPUT_DIR = "./results/";
     private static int STRING_LENGTH = 5;
     private static int[] POOLS = { 100, 1000, 5000 }; // sizes of arrays to test
@@ -28,7 +27,7 @@ public class Test {
         Integer[] array = new Integer[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = random.nextInt(); // 0-99
         }
         return array;
     }
@@ -38,11 +37,9 @@ public class Test {
      */
     private static Integer[] genAscIntArray(int size) {
         Integer[] array = new Integer[size];
-        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = i;
         }
-        Arrays.sort(array);
         return array;
     }
 
@@ -51,11 +48,9 @@ public class Test {
      */
     private static Integer[] genDescIntArray(int size) {
         Integer[] array = new Integer[size];
-        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = size - i;
         }
-        Arrays.sort(array, Collections.reverseOrder());
         return array;
     }
 
@@ -97,6 +92,7 @@ public class Test {
         Arrays.sort(array);
 
         return array;
+
     }
 
     /*
@@ -161,13 +157,23 @@ public class Test {
         return array;
     }
 
-    
+    /*
+     * Generate a random Double array.
+     */
+    private static Double[] genRandDoubleArray(int size) {
+        Double[] array = new Double[size];
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextDouble();
+        }
+        return array;
+    }
 
     /*
      * Compute time(ns) taken for a sorter to sort an array.
      */
-    private static <T extends Comparable<T>> long benchmarkSort(Sorter<T> sorter, T[] array) {
-        long start, end;
+    private static <T extends Comparable<T>> Long benchmarkSort(Sorter<T> sorter, T[] array) {
+        Long start, end;
         start = System.nanoTime();
         sorter.sort(array);
         end = System.nanoTime();
@@ -176,22 +182,30 @@ public class Test {
     }
 
     /*
-     * Warmups.
+     * Repeat the same
      */
-    private static <T extends Comparable<T>> void warmup(Sorter<T> sorter, T[] array, int cycles) {
-        for (int i = 0; i < cycles; i++) {
-            benchmarkSort(sorter, cpArray(array));
-        }
+    // private static <T extends Comparable<T>> long[] repeatBenchmark(Sorter<T> sorter, T[] array, int times) {
+    //     long[] attempts = new long[times];
+    //     /* Warmup */
+    //     for (int i = 0; i < WARMAP_CYCLES; i++) {
+    //         T[] burnerArray = Arrays.copyOf(array, array.length);
+    //         benchmarkSort(sorter, burnerArray);
+    //     }
 
-        return attempts;
-    }
+    //     for (int i = 0; i < times; i++) {
+    //         T[] burnerArray = Arrays.copyOf(array, array.length);
+    //         attempts[i] = benchmarkSort(sorter, burnerArray);
+    //     }
+
+    //     return attempts;
+    // }
 
     /*
      * Compute the mean value given an array of longs.
      */
-    private static long meanTime(long[] attempts) {
-        long sum = 0;
-        for (long t : attempts) {
+    private static Long meanTime(List<Long> attempts) {
+        Long sum = 0;
+        for (Long t : attempts) {
             sum += t;
         }
 
@@ -213,26 +227,26 @@ public class Test {
     /*
      * Prints on terminal a table row of results
      */
-    private static void printBenchResult(String type, int pool, long[] ppi, long[] unc, long[] wn) {
-        System.out.format("%-10s%10d%15d%15d%15d\n", type, pool, meanTime(ppi), meanTime(unc), meanTime(wn));
-    }
+    // private static void printBenchResult(String type, int pool, List<Long> ppi, List<Long> unc, List<Long> wn) {
+    //     System.out.format("%-10s%10d%15d%15d%15d\n", type, pool, meanTime(ppi), meanTime(unc), meanTime(wn));
+    // }
 
     /*
      * Write array to file
      */
-    public static void writeToFile(long array[], String filename) {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(OUTPUT_DIR + filename);
-            for (long time : array) {
-                writer.write(time + System.lineSeparator());
-            }
+    // public static void writeToFile(List<Long> array, String filename) {
+    //     FileWriter writer = null;
+    //     try {
+    //         writer = new FileWriter(OUTPUT_DIR + filename);
+    //         for (Long time : array) {
+    //             writer.write(time + System.lineSeparator());
+    //         }
 
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    //         writer.close();
+    //     } catch (IOException e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
 
     /*
      * Duplicate an array.
@@ -244,64 +258,63 @@ public class Test {
     /*
      * Perform a full cycle of benchmarks
      */
-    public static <T extends Comparable<T>> void benchmark(BubbleSortPassPerItem<T> ppiSorter,
-            BubbleSortUntilNoChange<T> uncSorter,
-            BubbleSortWhileNeeded<T> wnSorter, Supplier<T[]> arrayGenerator, int pool, String type) {
+    // public static <T extends Comparable<T>> void benchmark(BubbleSortPassPerItem<T> ppiSorter,
+    //         BubbleSortUntilNoChange<T> uncSorter,
+    //         BubbleSortWhileNeeded<T> wnSorter, Supplier<T[]> arrayGenerator, String type) {
+    //     T[] array = arrayGenerator.get();
+    //     int pool = array.length;
+    //     long[] ppiAttempts = repeatBenchmark(ppiSorter, cpArray(array), REPEAT_TIMES);
+    //     writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
+    //     long[] uncAttempts = repeatBenchmark(uncSorter, cpArray(array), REPEAT_TIMES);
+    //     writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
+    //     long[] wnAttempts = repeatBenchmark(wnSorter, cpArray(array), REPEAT_TIMES);
+    //     writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
 
-        long[] ppiAttempts = new long[REPEAT_TIMES];
-        long[] uncAttempts = new long[REPEAT_TIMES];
-        long[] wnAttempts = new long[REPEAT_TIMES];
-
-        for (int i = 0; i < REPEAT_TIMES; i++) {
-            T[] array = arrayGenerator.get();
-            ppiAttempts[i] = benchmarkSort(ppiSorter, cpArray(array));
-            uncAttempts[i] = benchmarkSort(uncSorter, cpArray(array));
-            wnAttempts[i] = benchmarkSort(wnSorter, cpArray(array));
-        }
-
-        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
-        writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
-        writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
-
-        printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
-    }
+    //     /* Print mean benchmarks */
+    //     printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
+    // }
 
     public static void main(String args[]) {
         /* Initialize sorters */
-        BubbleSortPassPerItem<String> ppiSorterStr = new BubbleSortPassPerItem<String>();
-        BubbleSortUntilNoChange<String> uncSorterStr = new BubbleSortUntilNoChange<String>();
-        BubbleSortWhileNeeded<String> wnSorterStr = new BubbleSortWhileNeeded<String>();
+        // BubbleSortPassPerItem<String> ppiSorterStr = new
+        // BubbleSortPassPerItem<String>();
+        // BubbleSortUntilNoChange<String> uncSorterStr = new
+        // BubbleSortUntilNoChange<String>();
+        // BubbleSortWhileNeeded<String> wnSorterStr = new
+        // BubbleSortWhileNeeded<String>();
 
         // BubbleSortPassPerItem<Double> ppiSorterDbl = new BubbleSortPassPerItem<Double>();
-        // BubbleSortUntilNoChange<Double> uncSorterDbl = new BubbleSortUntilNoChange<Double>();
+        // BubbleSortUntilNoChange<Double> uncSorterSDbl = new BubbleSortUntilNoChange<Double>();
         // BubbleSortWhileNeeded<Double> wnSorterDbl = new BubbleSortWhileNeeded<Double>();
 
-        BubbleSortPassPerItem<Integer> ppiSorterInt = new BubbleSortPassPerItem<Integer>();
-        BubbleSortUntilNoChange<Integer> uncSorterInt = new BubbleSortUntilNoChange<Integer>();
-        BubbleSortWhileNeeded<Integer> wnSorterInt = new BubbleSortWhileNeeded<Integer>();
+        // BubbleSortPassPerItem<Integer> ppiSorterInt = new BubbleSortPassPerItem<Integer>();
+        // BubbleSortUntilNoChange<Integer> uncSorterInt = new BubbleSortUntilNoChange<Integer>();
+        // BubbleSortWhileNeeded<Integer> wnSorterInt = new BubbleSortWhileNeeded<Integer>();
 
-        BubbleSortPassPerItem<Byte> ppiSorterByte = new BubbleSortPassPerItem<Byte>();
-        BubbleSortUntilNoChange<Byte> uncSorterByte = new BubbleSortUntilNoChange<Byte>();
-        BubbleSortWhileNeeded<Byte> wnSorterByte = new BubbleSortWhileNeeded<Byte>();
+        // BubbleSortPassPerItem<Byte> ppiSorterByte = new BubbleSortPassPerItem<Byte>();
+        // BubbleSortUntilNoChange<Byte> uncSorterByte = new BubbleSortUntilNoChange<Byte>();
+        // BubbleSortWhileNeeded<Byte> wnSorterByte = new BubbleSortWhileNeeded<Byte>();
 
-        printHeader();
+        // printHeader();
 
-        warmup(ppiSorterInt, genRandIntArray(750), WARMUP_CYCLES); // correct way of warming up here?
+        // List<Long> ppiAttempts = new ArrayList();
+        // List<Long> uncAttempts = new ArrayList();
+        // List<Long> wnAttempts = new ArrayList();
 
         /* Go through all test cases */
-        for (int p : POOLS) {
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genRandIntArray(p), p, "Integer~");
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genAscIntArray(p), p, "Integer>");
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genDescIntArray(p), p, "Integer<");
+        // for (int p : POOLS) {
+        //     Integer[] array = genRandIntArray(p);
 
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genRandByteArray(p), p, "Byte~");
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
+        //     ppiAttempts.add(benchmarkSort(ppiSorterInt, cpArray(array)));
+        //     uncAttempts.add(benchmarkSort(uncSorterInt, cpArray(array)));
+        //     wnAttempts.add(benchmarkSort(wnSorterInt, cpArray(array)));
+        // }
 
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genRandStrArray(p), p, "String~");
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genDescStrArray(p), p, "String<");
-        }
+        // writeToFile(ppiAttempts, "Integer_ppi");
+        // writeToFile(uncAttempts, "Integer_unc");
+        // writeToFile(wnAttempts, "Integer_wn");
+
+        // printBenchResult("Integer ~", 100, ppiAttempts, uncAttempts, wnAttempts);
 
         System.out.println("-".repeat(65));
     }

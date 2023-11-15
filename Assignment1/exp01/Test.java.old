@@ -3,20 +3,18 @@ package exp01;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.Collections;
 
+interface ArrayGenerator {
+    T[] create(int size);
+}
 
 public class Test {
     private static int REPEAT_TIMES = 100; // Number of repetitions for a multiple benchmark test
-    private static int WARMUP_CYCLES = 25; // Cycles when warming up;
+    private static int WARMAP_CYCLES = 50; // Cycles when warming up;
     private static String OUTPUT_DIR = "./results/";
     private static int STRING_LENGTH = 5;
     private static int[] POOLS = { 100, 1000, 5000 }; // sizes of arrays to test
@@ -28,7 +26,7 @@ public class Test {
         Integer[] array = new Integer[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = random.nextInt(); // 0-99
         }
         return array;
     }
@@ -38,11 +36,9 @@ public class Test {
      */
     private static Integer[] genAscIntArray(int size) {
         Integer[] array = new Integer[size];
-        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = i;
         }
-        Arrays.sort(array);
         return array;
     }
 
@@ -51,11 +47,9 @@ public class Test {
      */
     private static Integer[] genDescIntArray(int size) {
         Integer[] array = new Integer[size];
-        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(); 
+            array[i] = size - i;
         }
-        Arrays.sort(array, Collections.reverseOrder());
         return array;
     }
 
@@ -97,6 +91,7 @@ public class Test {
         Arrays.sort(array);
 
         return array;
+
     }
 
     /*
@@ -161,7 +156,17 @@ public class Test {
         return array;
     }
 
-    
+    /*
+     * Generate a random Double array.
+     */
+    private static Double[] genRandDoubleArray(int size) {
+        Double[] array = new Double[size];
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextDouble();
+        }
+        return array;
+    }
 
     /*
      * Compute time(ns) taken for a sorter to sort an array.
@@ -176,11 +181,19 @@ public class Test {
     }
 
     /*
-     * Warmups.
+     * Repeat the same
      */
-    private static <T extends Comparable<T>> void warmup(Sorter<T> sorter, T[] array, int cycles) {
-        for (int i = 0; i < cycles; i++) {
-            benchmarkSort(sorter, cpArray(array));
+    private static <T extends Comparable<T>> long[] repeatBenchmark(Sorter<T> sorter, T[] array, int times) {
+        long[] attempts = new long[times];
+        /* Warmup */
+        for (int i = 0; i < WARMAP_CYCLES; i++) {
+            T[] burnerArray = Arrays.copyOf(array, array.length);
+            benchmarkSort(sorter, burnerArray);
+        }
+
+        for (int i = 0; i < times; i++) {
+            T[] burnerArray = Arrays.copyOf(array, array.length);
+            attempts[i] = benchmarkSort(sorter, burnerArray);
         }
 
         return attempts;
@@ -246,35 +259,30 @@ public class Test {
      */
     public static <T extends Comparable<T>> void benchmark(BubbleSortPassPerItem<T> ppiSorter,
             BubbleSortUntilNoChange<T> uncSorter,
-            BubbleSortWhileNeeded<T> wnSorter, Supplier<T[]> arrayGenerator, int pool, String type) {
+            BubbleSortWhileNeeded<T> wnSorter, Supplier<T[]> arrayGenerator, String type) {
+        T[] array = arrayGenerator.get();
 
-        long[] ppiAttempts = new long[REPEAT_TIMES];
-        long[] uncAttempts = new long[REPEAT_TIMES];
-        long[] wnAttempts = new long[REPEAT_TIMES];
-
-        for (int i = 0; i < REPEAT_TIMES; i++) {
-            T[] array = arrayGenerator.get();
-            ppiAttempts[i] = benchmarkSort(ppiSorter, cpArray(array));
-            uncAttempts[i] = benchmarkSort(uncSorter, cpArray(array));
-            wnAttempts[i] = benchmarkSort(wnSorter, cpArray(array));
-        }
-
+        int pool = array.length;
+        long[] ppiAttempts = repeatBenchmark(ppiSorter, cpArray(array), REPEAT_TIMES);
         writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
+        long[] uncAttempts = repeatBenchmark(uncSorter, cpArray(array), REPEAT_TIMES);
         writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
+        long[] wnAttempts = repeatBenchmark(wnSorter, cpArray(array), REPEAT_TIMES);
         writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
 
+        /* Print mean benchmarks */
         printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
     }
 
     public static void main(String args[]) {
         /* Initialize sorters */
-        BubbleSortPassPerItem<String> ppiSorterStr = new BubbleSortPassPerItem<String>();
-        BubbleSortUntilNoChange<String> uncSorterStr = new BubbleSortUntilNoChange<String>();
-        BubbleSortWhileNeeded<String> wnSorterStr = new BubbleSortWhileNeeded<String>();
+        // BubbleSortPassPerItem<String> ppiSorterStr = new BubbleSortPassPerItem<String>();
+        // BubbleSortUntilNoChange<String> uncSorterStr = new BubbleSortUntilNoChange<String>();
+        // BubbleSortWhileNeeded<String> wnSorterStr = new BubbleSortWhileNeeded<String>();
 
-        // BubbleSortPassPerItem<Double> ppiSorterDbl = new BubbleSortPassPerItem<Double>();
-        // BubbleSortUntilNoChange<Double> uncSorterDbl = new BubbleSortUntilNoChange<Double>();
-        // BubbleSortWhileNeeded<Double> wnSorterDbl = new BubbleSortWhileNeeded<Double>();
+        BubbleSortPassPerItem<Double> ppiSorterDbl = new BubbleSortPassPerItem<Double>();
+        BubbleSortUntilNoChange<Double> uncSorterSDbl = new BubbleSortUntilNoChange<Double>();
+        BubbleSortWhileNeeded<Double> wnSorterDbl = new BubbleSortWhileNeeded<Double>();
 
         BubbleSortPassPerItem<Integer> ppiSorterInt = new BubbleSortPassPerItem<Integer>();
         BubbleSortUntilNoChange<Integer> uncSorterInt = new BubbleSortUntilNoChange<Integer>();
@@ -286,21 +294,28 @@ public class Test {
 
         printHeader();
 
-        warmup(ppiSorterInt, genRandIntArray(750), WARMUP_CYCLES); // correct way of warming up here?
-
         /* Go through all test cases */
         for (int p : POOLS) {
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genRandIntArray(p), p, "Integer~");
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genAscIntArray(p), p, "Integer>");
-            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genDescIntArray(p), p, "Integer<");
+            /* Integer */
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genRandIntArray(p), "Integer ~");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genAscIntArray(p), "Integer >");
+            benchmark(ppiSorterInt, uncSorterInt, wnSorterInt, () -> genDescIntArray(p), "Integer <");
 
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genRandByteArray(p), p, "Byte~");
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), p, "Byte>");
-            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), p, "Byte<");
+            /* String */
+            // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genRandStrArray(p),
+            // "String ~");
+            // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genAscStrArray(p), "String
+            // >");
+            // benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, genDescStrArray(p),
+            // "String <");
 
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genRandStrArray(p), p, "String~");
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genAscStrArray(p), p, "String>");
-            benchmark(ppiSorterStr, uncSorterStr, wnSorterStr, () -> genDescStrArray(p), p, "String<");
+            /* Double */
+            benchmark(ppiSorterDbl, uncSorterSDbl, wnSorterDbl, () -> genRandDoubleArray(p), "Double ~");
+
+            /* Byte */
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genRandByteArray(p), "Byte ~");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genAscByteArray(p), "Byte >");
+            benchmark(ppiSorterByte, uncSorterByte, wnSorterByte, () -> genDescByteArray(p), "Byte <");
         }
 
         System.out.println("-".repeat(65));
