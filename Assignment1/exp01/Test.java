@@ -225,7 +225,7 @@ public class Test {
         try {
             writer = new FileWriter(OUTPUT_DIR + filename);
             for (long time : array) {
-                writer.write(time + System.lineSeparator());
+                writer.write(time + ",");
             }
 
             writer.close();
@@ -259,9 +259,9 @@ public class Test {
             wnAttempts[i] = benchmarkSort(wnSorter, cpArray(array));
         }
 
-        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".txt");
-        writeToFile(uncAttempts, type + "_unc_" + pool + ".txt");
-        writeToFile(wnAttempts, type + "_wn_" + pool + ".txt");
+        writeToFile(ppiAttempts, type + "_ppi_" + pool + ".csv");
+        writeToFile(uncAttempts, type + "_unc_" + pool + ".csv");
+        writeToFile(wnAttempts, type + "_wn_" + pool + ".csv");
 
         printBenchResult(type, pool, ppiAttempts, uncAttempts, wnAttempts);
     }
