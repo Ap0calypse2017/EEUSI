@@ -1,0 +1,643 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.7.1)  17 NOV 2023 15:09
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Report.tex
+(./Report.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen137
+\captionmargin@=\dimen138
+\captionwidth=\dimen139
+\caption@tempdima=\dimen140
+\caption@indent=\dimen141
+\caption@parindent=\dimen142
+\caption@hangindent=\dimen143
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count175
+\c@continuedfloat=\count176
+)
+\c@subfigure=\count177
+\c@subtable=\count178
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen144
+\lightrulewidth=\dimen145
+\cmidrulewidth=\dimen146
+\belowrulesep=\dimen147
+\belowbottomsep=\dimen148
+\aboverulesep=\dimen149
+\abovetopsep=\dimen150
+\cmidrulesep=\dimen151
+\cmidrulekern=\dimen152
+\defaultaddspace=\dimen153
+\@cmidla=\count179
+\@cmidlb=\count180
+\@aboverulesep=\dimen154
+\@belowrulesep=\dimen155
+\@thisruleclass=\count181
+\@lastruleclass=\count182
+\@thisrulewidth=\dimen156
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen157
+\ar@mcellbox=\box45
+\extrarowheight=\dimen158
+\NC@list=\toks15
+\extratabsurround=\skip49
+\backup@length=\skip50
+\ar@cellbox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+))
+\Gm@cnth=\count183
+\Gm@cntv=\count184
+\c@Gm@tempcnt=\count185
+\Gm@bindingoffset=\dimen159
+\Gm@wd@mp=\dimen160
+\Gm@odd@mp=\dimen161
+\Gm@even@mp=\dimen162
+\Gm@layoutwidth=\dimen163
+\Gm@layoutheight=\dimen164
+\Gm@layouthoffset=\dimen165
+\Gm@layoutvoffset=\dimen166
+\Gm@dimlist=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen167
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen168
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count186
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count187
+\leftroot@=\count188
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count189
+\DOTSCASE@=\count190
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box47
+\strutbox@=\box48
+\big@size=\dimen169
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count191
+\c@MaxMatrixCols=\count192
+\dotsspace@=\muskip16
+\c@parentequation=\count193
+\dspbrk@lvl=\count194
+\tag@help=\toks18
+\row@=\count195
+\column@=\count196
+\maxfields@=\count197
+\andhelp@=\toks19
+\eqnshift@=\dimen170
+\alignsep@=\dimen171
+\tagshift@=\dimen172
+\tagwidth@=\dimen173
+\totwidth@=\dimen174
+\lineht@=\dimen175
+\@envbody=\toks20
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count198
+\l__pdf_internal_box=\box49
+)
+(./Report.aux
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+
+LaTeX Warning: Label `fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img1' multiply defined.
+
+
+LaTeX Warning: Label `fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img2' multiply defined.
+
+
+LaTeX Warning: Label `fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:img3' multiply defined.
+
+
+LaTeX Warning: Label `fig:three_images' multiply defined.
+
+)
+\openout1 = `Report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count199
+\scratchdimen=\dimen176
+\scratchbox=\box50
+\nofMPsegments=\count266
+\nofMParguments=\count267
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count268
+\MPscratchDim=\dimen177
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
+\everyMPtoPDFconversion=\toks23
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+<../figureIntRandom100.png, id=1, 418.4433pt x 361.35pt>
+File: ../figureIntRandom100.png Graphic file (type png)
+<use ../figureIntRandom100.png>
+Package pdftex.def Info: ../figureIntRandom100.png  used on input line 17.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntRandom1000.png, id=3, 418.4433pt x 361.35pt>
+File: ../figureIntRandom1000.png Graphic file (type png)
+<use ../figureIntRandom1000.png>
+Package pdftex.def Info: ../figureIntRandom1000.png  used on input line 23.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntRandom5000.png, id=4, 418.4433pt x 361.35pt>
+File: ../figureIntRandom5000.png Graphic file (type png)
+<use ../figureIntRandom5000.png>
+Package pdftex.def Info: ../figureIntRandom5000.png  used on input line 29.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteRandom100.png, id=5, 418.4433pt x 361.35pt>
+File: ../figureByteRandom100.png Graphic file (type png)
+<use ../figureByteRandom100.png>
+Package pdftex.def Info: ../figureByteRandom100.png  used on input line 41.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteRandom1000.png, id=6, 418.4433pt x 361.35pt>
+File: ../figureByteRandom1000.png Graphic file (type png)
+<use ../figureByteRandom1000.png>
+Package pdftex.def Info: ../figureByteRandom1000.png  used on input line 47.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteRandom5000.png, id=7, 418.4433pt x 361.35pt>
+File: ../figureByteRandom5000.png Graphic file (type png)
+<use ../figureByteRandom5000.png>
+Package pdftex.def Info: ../figureByteRandom5000.png  used on input line 53.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringRandom100.png, id=8, 418.4433pt x 361.35pt>
+File: ../figureStringRandom100.png Graphic file (type png)
+<use ../figureStringRandom100.png>
+Package pdftex.def Info: ../figureStringRandom100.png  used on input line 65.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringRandom1000.png, id=9, 418.4433pt x 361.35pt>
+File: ../figureStringRandom1000.png Graphic file (type png)
+<use ../figureStringRandom1000.png>
+Package pdftex.def Info: ../figureStringRandom1000.png  used on input line 71.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringRandom5000.png, id=10, 361.35pt x 361.35pt>
+File: ../figureStringRandom5000.png Graphic file (type png)
+<use ../figureStringRandom5000.png>
+Package pdftex.def Info: ../figureStringRandom5000.png  used on input line 77.
+(pdftex.def)             Requested size: 140.92793pt x 140.92593pt.
+
+Overfull \hbox (3.60057pt too wide) in paragraph at lines 129--144
+ [][] 
+ []
+
+
+Overfull \hbox (3.60057pt too wide) in paragraph at lines 192--207
+ [][] 
+ []
+
+<../figureIntDesc100.png, id=11, 418.4433pt x 361.35pt>
+File: ../figureIntDesc100.png Graphic file (type png)
+<use ../figureIntDesc100.png>
+Package pdftex.def Info: ../figureIntDesc100.png  used on input line 215.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntDesc1000.png, id=12, 418.4433pt x 361.35pt>
+File: ../figureIntDesc1000.png Graphic file (type png)
+<use ../figureIntDesc1000.png>
+Package pdftex.def Info: ../figureIntDesc1000.png  used on input line 221.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntDesc5000.png, id=13, 418.4433pt x 361.35pt>
+File: ../figureIntDesc5000.png Graphic file (type png)
+<use ../figureIntDesc5000.png>
+Package pdftex.def Info: ../figureIntDesc5000.png  used on input line 227.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteDesc100.png, id=14, 418.4433pt x 361.35pt>
+File: ../figureByteDesc100.png Graphic file (type png)
+<use ../figureByteDesc100.png>
+Package pdftex.def Info: ../figureByteDesc100.png  used on input line 239.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteDesc1000.png, id=15, 418.4433pt x 361.35pt>
+File: ../figureByteDesc1000.png Graphic file (type png)
+<use ../figureByteDesc1000.png>
+Package pdftex.def Info: ../figureByteDesc1000.png  used on input line 245.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteDesc5000.png, id=16, 418.4433pt x 361.35pt>
+File: ../figureByteDesc5000.png Graphic file (type png)
+<use ../figureByteDesc5000.png>
+Package pdftex.def Info: ../figureByteDesc5000.png  used on input line 251.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringDesc100.png, id=17, 418.4433pt x 361.35pt>
+File: ../figureStringDesc100.png Graphic file (type png)
+<use ../figureStringDesc100.png>
+Package pdftex.def Info: ../figureStringDesc100.png  used on input line 263.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringDesc1000.png, id=18, 418.4433pt x 361.35pt>
+File: ../figureStringDesc1000.png Graphic file (type png)
+<use ../figureStringDesc1000.png>
+Package pdftex.def Info: ../figureStringDesc1000.png  used on input line 269.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringDesc5000.png, id=19, 418.4433pt x 361.35pt>
+File: ../figureStringDesc5000.png Graphic file (type png)
+<use ../figureStringDesc5000.png>
+Package pdftex.def Info: ../figureStringDesc5000.png  used on input line 275.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntAsc100.png, id=20, 418.4433pt x 361.35pt>
+File: ../figureIntAsc100.png Graphic file (type png)
+<use ../figureIntAsc100.png>
+Package pdftex.def Info: ../figureIntAsc100.png  used on input line 287.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntAsc1000.png, id=21, 418.4433pt x 361.35pt>
+File: ../figureIntAsc1000.png Graphic file (type png)
+<use ../figureIntAsc1000.png>
+Package pdftex.def Info: ../figureIntAsc1000.png  used on input line 293.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureIntAsc5000.png, id=22, 418.4433pt x 361.35pt>
+File: ../figureIntAsc5000.png Graphic file (type png)
+<use ../figureIntAsc5000.png>
+Package pdftex.def Info: ../figureIntAsc5000.png  used on input line 299.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteAsc100.png, id=23, 418.4433pt x 361.35pt>
+File: ../figureByteAsc100.png Graphic file (type png)
+<use ../figureByteAsc100.png>
+Package pdftex.def Info: ../figureByteAsc100.png  used on input line 311.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteAsc1000.png, id=24, 418.4433pt x 361.35pt>
+File: ../figureByteAsc1000.png Graphic file (type png)
+<use ../figureByteAsc1000.png>
+Package pdftex.def Info: ../figureByteAsc1000.png  used on input line 317.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureByteAsc5000.png, id=25, 418.4433pt x 361.35pt>
+File: ../figureByteAsc5000.png Graphic file (type png)
+<use ../figureByteAsc5000.png>
+Package pdftex.def Info: ../figureByteAsc5000.png  used on input line 323.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringAsc100.png, id=26, 418.4433pt x 361.35pt>
+File: ../figureStringAsc100.png Graphic file (type png)
+<use ../figureStringAsc100.png>
+Package pdftex.def Info: ../figureStringAsc100.png  used on input line 335.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringAsc1000.png, id=27, 418.4433pt x 361.35pt>
+File: ../figureStringAsc1000.png Graphic file (type png)
+<use ../figureStringAsc1000.png>
+Package pdftex.def Info: ../figureStringAsc1000.png  used on input line 341.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+<../figureStringAsc5000.png, id=28, 418.4433pt x 361.35pt>
+File: ../figureStringAsc5000.png Graphic file (type png)
+<use ../figureStringAsc5000.png>
+Package pdftex.def Info: ../figureStringAsc5000.png  used on input line 347.
+(pdftex.def)             Requested size: 140.92793pt x 121.69948pt.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../figureIntRandom100.png>
+ <../figureIntRandom1000.png> <../figureIntRandom5000.png> <../figureByteRandom
+100.png> <../figureByteRandom1000.png> <../figureByteRandom5000.png>]
+[2] [3 <../figureStringRandom100.png> <../figureStringRandom1000.png> <../figur
+eStringRandom5000.png>] [4 <../figureIntDesc100.png> <../figureIntDesc1000.png>
+ <../figureIntDesc5000.png> <../figureByteDesc100.png> <../figureByteDesc1000.p
+ng> <../figureByteDesc5000.png> <../figureStringDesc100.png> <../figureStringDe
+sc1000.png> <../figureStringDesc5000.png>] [5 <../figureIntAsc100.png> <../figu
+reIntAsc1000.png> <../figureIntAsc5000.png> <../figureByteAsc100.png> <../figur
+eByteAsc1000.png> <../figureByteAsc5000.png> <../figureStringAsc100.png> <../fi
+gureStringAsc1000.png> <../figureStringAsc5000.png>] (./Report.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4158 strings out of 483183
+ 65808 string characters out of 5966293
+ 330062 words of memory out of 5000000
+ 19121 multiletter control sequences out of 15000+600000
+ 533399 words of font info for 28 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 48i,7n,46p,278b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+Output written on Report.pdf (5 pages, 430115 bytes).
+PDF statistics:
+ 87 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 136 words of extra memory for PDF output out of 10000 (max. 10000000)
+
