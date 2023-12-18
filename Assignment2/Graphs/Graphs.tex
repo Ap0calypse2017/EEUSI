@@ -1,0 +1,82 @@
+%----- Requires booktabs package -----%
+\documentclass[]{article}
+
+\usepackage{booktabs}
+\begin{document}
+\begin{table}[h]
+	\centering
+	\caption{Descriptive Statistics}
+	\label{tab:descriptiveStatistics}
+	{
+		\begin{tabular}{lrrr}
+			\toprule
+			\multicolumn{1}{c}{} & \multicolumn{3}{c}{Time (ms)} \\
+			\cline{2-4}
+			 & Camel Case & Kebab Case & No Separator  \\
+			\cmidrule[0.4pt]{1-4}
+			Mean & $2834.113$ & $3193.473$ & $4069.680$  \\
+			Std. Deviation & $1846.267$ & $2270.824$ & $2786.871$  \\
+			Minimum & $892.000$ & $895.000$ & $662.000$  \\
+			Maximum & $14599.000$ & $12555.000$ & $19331.000$  \\
+			25th percentile & $1640.000$ & $1745.000$ & $2225.750$  \\
+			50th percentile & $2318.500$ & $2394.000$ & $3125.000$  \\
+			75th percentile & $3471.000$ & $3591.250$ & $5049.500$  \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\label{tab:descriptiveStatistics}
+	{
+		\begin{tabular}{lrrr}
+			\toprule
+			\multicolumn{1}{c}{} & \textbf{Camel Case} & \textbf{Kebab Case} & \textbf{No Separator} \\
+			\cmidrule(lr{.75em}){2-4}
+			\textbf{Minimum (ms)} & $892.00$ & $895.00$ & $662.00$  \\
+			\textbf{1st quartile (ms)} & $1640.00$ & $1745.00$ & $2225.75$  \\
+			\textbf{Median (ms)} & $2318.50$ & $2394.00$ & $3125.00$  \\
+			\textbf{3rd quartile (ms)} & $3471.00$ & $3591.25$ & $5049.50$  \\
+			\textbf{Maximum (ms)} & $14599.00$ & $12555.00$ & $19331.00$  \\
+			\textbf{Mean (ms)} & $2834.11$ & $3193.47$ & $4069.68$  \\
+			\textbf{Std. Deviation (ms)} & $1846.27$ & $2270.82$ & $2786.81$  \\
+			
+			
+			
+			
+			
+			\bottomrule
+		\end{tabular}
+	}
+\end{table}
+
+
+
+
+\begin{table}[h]
+	\centering
+	\caption{Descriptive Statistics}
+	\label{tab:descriptiveStatistics}
+	{
+		\begin{tabular}{lrrrrrrrr}
+			\toprule
+			 &  & Mean & Std. Deviation & Minimum & Maximum & 25th percentile & 50th percentile & 75th percentile  \\
+			\cmidrule[0.4pt]{1-9}
+			Time & KC1 & $2443.933$ & $2342.147$ & $1023.000$ & $10519.000$ & $1338.500$ & $1778.000$ & $2289.000$  \\
+			 & KC10 & $3806.933$ & $3305.059$ & $895.000$ & $12495.000$ & $1966.000$ & $2367.000$ & $4256.500$  \\
+			 & KC2 & $2388.933$ & $1294.598$ & $1097.000$ & $6049.000$ & $1568.500$ & $1934.000$ & $2854.500$  \\
+			 & KC3 & $2619.067$ & $1375.271$ & $1391.000$ & $6459.000$ & $1748.500$ & $2288.000$ & $2861.500$  \\
+			 & KC4 & $3164.867$ & $2172.813$ & $1067.000$ & $8519.000$ & $1773.500$ & $2223.000$ & $3777.000$  \\
+			 & KC5 & $2901.467$ & $1589.165$ & $1060.000$ & $7313.000$ & $2013.500$ & $2381.000$ & $3314.500$  \\
+			 & KC6 & $4655.067$ & $3143.760$ & $1001.000$ & $10426.000$ & $1785.500$ & $4165.000$ & $6608.500$  \\
+			 & KC7 & $3346.533$ & $1367.151$ & $1734.000$ & $6954.000$ & $2367.500$ & $3214.000$ & $3988.500$  \\
+			 & KC8 & $3988.067$ & $2934.229$ & $1314.000$ & $12555.000$ & $2284.000$ & $3015.000$ & $4436.000$  \\
+			 & KC9 & $2619.867$ & $1344.997$ & $1089.000$ & $6573.000$ & $1760.500$ & $2195.000$ & $3149.500$  \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{table}
+
+
+\end{document}
