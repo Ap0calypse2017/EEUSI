@@ -1,0 +1,3 @@
+[submodule "Assignment2/case-survey"]
+	path = Assignment2/case-survey
+	url = https://github.com/azanzi/case-survey.git
